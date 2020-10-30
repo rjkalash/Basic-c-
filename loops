@@ -1,0 +1,5 @@
+// Loops are use when we want some of command to occur number of times we want //
+//For example to print the 1 to 10 number the following lines of the code is given below  //
+int i;
+for(i=1;i<=10;i++)
+printf("\n%d",i)
