@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<conio.h>
+#define n 5
+int queue[n];
+int front =-1;
+int rear=-1;
+
+// to perform the enqueue operation
+void enqueue(int x){
+if(front == -1 && rear == -1){
+        front =rear = 0;
+        queue[rear]=x;
+}
+else if((rear+1)%n == front){
+    printf("\nThe circular queue is full.");
+}
+else {
+    rear=(rear+1)%n;
+    queue[rear]=x;
+}
+}
+
+// to perform the dequeue operation
+void deque(){
+if(front == -1 && rear==-1){
+    printf("\nUnderflow condition");
+}
+else if(front == rear){
+    front = rear =-1;
+}
+else{
+          printf("\nThe element deleted from the queue is %d",queue[front]);
+    front =(front+1)%n;
+
+
+}
+
+}
+// displaying the element of the queue
+void display(){
+int i =front;
+if(front ==-1&&rear==-1){
+    printf("\nThe circular queue is empty .");
+}
+else{
+    while(i!=rear){
+        printf("\n%d",queue[i]);
+        i=(i+1)%n;
+    }
+    printf("\n%d",queue[rear]);
+}
+}
+
+void main(){
+    int choice;
+    int item;
+    char ans;
+    do {
+    printf("\n===============MAIN MENU======================");
+    printf("\n1:ENQUEUE\n2:DEQUEUE\n3:DISPLAY");
+    printf("\nEnter choice");
+    scanf("%d",&choice);
+    switch(choice){
+case 1 :
+    printf("\nAdding .........");
+    printf("\nEnter the element to be inserted:");
+    scanf("%d",&item);
+    enqueue(item);
+    break;
+case 2:
+    printf("\nDeleting.............");
+    deque();
+    break;
+case 3:
+    printf("\nDisplaying ..............");
+    display();
+    break;
+default:
+    printf("\nWrong selection ");
+break;
+    }
+printf("\nDo you want to continue y/n:");
+ans = getche();
+}while(ans == 'y'||ans == 'Y');
+
+}
