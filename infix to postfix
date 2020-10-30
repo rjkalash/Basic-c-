@@ -1,0 +1,140 @@
+// the c program to convert the infix to postfix //
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+struct stack {
+char s[50];
+int top;
+}st;
+
+void main(){
+
+char infix[30];
+char infix1[30];
+void intopre(char infix1[30]);
+int j=0;
+printf("\nEnter the expression : ");
+scanf("%s",infix);
+for(int i=strlen(infix)-1;i>=0;i--){
+    infix1[j] = infix[i];
+    j++;
+}
+infix[j]='\0';
+printf("\nReversed string is %s",infix1);
+// to make he '('as')'and vice versa
+for(int i=0;infix1[i]!='\0';i++){
+    if (infix1[i]== ')'){
+        infix1[i] ='(';
+        i++;
+    }
+    else if(infix1[i] == '('){
+                infix1[i] = ')';
+                i++;
+            }
+}
+printf("\nThe new string is %s",infix1);
+intopre(infix1);
+}
+
+void intopre(char infix1[30])
+{
+    st.top = -1;
+    st.top = st.top +1;
+    st.s[st.top]='$';
+    char pretfix[30];
+    int i,j;
+    char ch;
+    int instack(char ch);
+    int incomming(char ch);
+    void push(char item);
+    char pop();
+    j=0;
+    for (i=0;infix1[i]!='\0';i++){
+        ch = infix1[i];
+        while(instack(st.s[st.top])>incomming(ch))
+        {
+            pretfix[j]=pop();
+            j++;
+
+        }
+        if(instack(st.s[st.top])!=incomming(ch))
+            push(ch);
+        else
+            pop();
+
+    }
+    while((ch = pop())!='$'){
+        pretfix[j]=ch;
+        j++;
+        }
+        pretfix[j]='\0';
+        printf("\nThe prefix expression of the infix operation is %s",strrev(pretfix));
+
+}
+
+int instack(char ch){
+int pri;
+switch(ch){
+case '+':
+case '-':
+    pri = 2;
+    break;
+case '*':
+case '/':
+case '%':
+    pri = 4;
+    break;
+case '^':
+    pri = 5;
+    break;
+case '(':
+    pri = 0;
+    break;
+case '$':
+    pri = -1;
+    break;
+    default : pri = 8;
+
+}
+return pri;
+}
+
+int incomming(char ch ){
+int pri ;
+switch(ch){
+case '+':
+case '-':
+    pri = 1;
+    break;
+case '*':
+case '%':
+case '/':
+    pri = 3;
+    break ;
+case '^':
+    pri =6;
+    break;
+case '(':
+    pri =9;
+    break;
+    case ')':
+    pri =0;
+    break;
+    default :
+        pri =7;
+}
+return pri ;
+}
+
+void push(char item){
+st.top++;
+st.s[st.top] = item;
+}
+
+char pop(){
+char e;
+e= st.s[st.top];
+st.top--;
+return e;
+}
