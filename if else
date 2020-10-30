@@ -1,0 +1,9 @@
+// the c program will demonstrate if else command in c 
+ int i;
+ printf("enter age");
+ scanf("%d",&age);
+ if(age < 18) 
+ printf("Not elligible to vote ");
+ else
+ printf("Elligible to vote");
+ 
